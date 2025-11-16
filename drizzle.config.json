@@ -1,0 +1,8 @@
+{
+  "schema": "./src/db/schema.ts",
+  "out": "./drizzle",
+  "dialect": "postgresql",
+  "dbCredentials": {
+    "url": "postgresql://postgres.pqcxsbtuittbfchembsn:PostgresDB_2024_Secure@aws-1-us-east-2.pooler.supabase.com:5432/postgres"
+  }
+}
