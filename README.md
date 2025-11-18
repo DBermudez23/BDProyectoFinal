@@ -1,4 +1,3 @@
-```markdown
 # BDProyectoFinal - Sistema de Gestión Farmacéutica 💊
 
 ## 📋 Descripción
