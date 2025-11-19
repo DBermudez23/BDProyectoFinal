@@ -1,11 +1,9 @@
-```markdown
-# BDProyectoFinal - Sistema de Gestión Farmacéutica 💊
+# PROYECTO FINAL ACADEMICO  - CURSO BASES DE DATOS UTP
 
 ## 📋 Descripción
-Sistema completo de gestión para farmacias que permite administrar usuarios, medicamentos, recetas médicas y dispensación de productos farmacéuticos.
+Proyecto en el cual se realiza un modulo para un sistema para mejorar la gestión de un hospital, el problema a solucionar se basa en la formulación de recetas ya que no se puede llevar un control claro y preciso del inventario. La solución se lleva a cabo a partir de un formulario con capacidad de revisión de stock de lotes en el inventario para llevar un control preciso en la formulación de recetas médicas.
 
 ## 🚀 Características Principales
-- **Gestión de Usuarios**: Médicos, pacientes y personal de farmacia
 - **Control de Inventario**: Lotes, vencimientos y stock
 - **Sistema de Recetas**: Prescripciones médicas digitales
 - **Dispensación**: Control preciso de medicamentos entregados
@@ -59,9 +57,11 @@ erDiagram
 - **Supabase** - Plataforma backend como servicio
 
 ### Desarrollo
-- **TypeScript** - Tipado estático
+- **JavaScript** - Tipado estático
 - **Git** - Control de versiones
 - **Drizzle Kit** - Herramientas de migración
+- **React.js** - Libreria basada en componentes
+- **Tailwind CSS** - Framework CSS
 
 ## 📦 Instalación y Configuración
 
@@ -105,11 +105,6 @@ npm run db:studio
 
 ## 👥 Roles del Sistema
 
-### Administrador
-- Gestión completa de usuarios y permisos
-- Configuración del sistema
-- Reportes y estadísticas
-
 ### Médico
 - Crear y gestionar recetas médicas
 - Consultar historial de pacientes
@@ -120,9 +115,6 @@ npm run db:studio
 - Gestionar inventario
 - Controlar vencimientos
 
-### Paciente
-- Consultar recetas propias
-- Ver historial de dispensaciones
 
 ## 📊 Scripts Disponibles
 
@@ -136,7 +128,9 @@ npm run db:migrate   # Aplicar migraciones
 ## 🤝 Contribuidores
 
 - **Juan Felipe Lelion** - [juanfelipelelion@gmail.com](mailto:juanfelipelelion@gmail.com)
-- [Agregar nombres de otros integrantes del grupo]
+- **Daniel Felipe Bermudez** - [d.bermudez1@utp.edu.co](mailto:d.bermudez1@utp.edu.co)
+- **Cristian Castañeda** - [cristian.castaneda1@utp.edu.co](mailto:cristian.castaneda1@utp.edu.co)
+
 
 ## 📄 Licencia
 Este proyecto es desarrollado con fines académicos.
