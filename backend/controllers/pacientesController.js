@@ -5,7 +5,7 @@ import { eq, desc, like, and, or } from "drizzle-orm";
 // API para obtener todos los pacientes con información de usuario
 const obtenerPacientes = async (req, res) => {
     try {
-        const { pagina = 1, limite = 10, buscar = '' } = req.query;
+        const { buscar = '' } = req.query;
 
         // Construir condiciones de búsqueda
         const whereConditions = [];
@@ -20,7 +20,7 @@ const obtenerPacientes = async (req, res) => {
             );
         }
 
-        // Obtener pacientes con información de usuario
+        // Obtener TODOS los pacientes
         const pacientesData = await db
             .select({
                 idPaciente: pacientes.idPaciente,
@@ -46,28 +46,12 @@ const obtenerPacientes = async (req, res) => {
             .from(pacientes)
             .innerJoin(usuarios, eq(pacientes.idUsuario, usuarios.idUsuario))
             .where(whereConditions.length > 0 ? and(...whereConditions) : undefined)
-            .limit(parseInt(limite))
-            .offset((parseInt(pagina) - 1) * parseInt(limite))
             .orderBy(desc(usuarios.createdAt));
-
-        // Contar total para paginación
-        const totalResult = await db
-            .select({ count: pacientes.idPaciente })
-            .from(pacientes)
-            .innerJoin(usuarios, eq(pacientes.idUsuario, usuarios.idUsuario))
-            .where(whereConditions.length > 0 ? and(...whereConditions) : undefined);
-
-        const total = parseInt(totalResult[0]?.count || 0);
 
         res.status(200).json({
             success: true,
             data: pacientesData,
-            paginacion: {
-                pagina: parseInt(pagina),
-                limite: parseInt(limite),
-                total,
-                paginas: Math.ceil(total / parseInt(limite))
-            }
+            total: pacientesData.length
         });
 
     } catch (error) {
@@ -86,6 +70,7 @@ const obtenerPacientePorId = async (req, res) => {
 
         const pacienteData = await db
             .select({
+                // Datos de la tabla pacientes
                 idPaciente: pacientes.idPaciente,
                 tipoSangre: pacientes.tipoSangre,
                 alergias: pacientes.alergias,
@@ -94,7 +79,7 @@ const obtenerPacientePorId = async (req, res) => {
                 contactoEmergenciaTelefono: pacientes.contactoEmergenciaTelefono,
                 estadoCivil: pacientes.estadoCivil,
                 ocupacion: pacientes.ocupacion,
-                // Datos del usuario
+                // Datos de la tabla usuarios
                 idUsuario: usuarios.idUsuario,
                 tipoDocumento: usuarios.tipoDocumento,
                 numeroDocumento: usuarios.numeroDocumento,
@@ -153,10 +138,10 @@ const crearPaciente = async (req, res) => {
             fechaNacimiento,
             genero,
             direccion,
-            ciudad = 'Bogotá',
+            ciudad = 'Pereira',
             passwordHash,
             idRol = 3, // Rol de paciente por defecto
-            
+
             // Datos específicos del paciente
             tipoSangre = null,
             alergias = null,
@@ -206,7 +191,7 @@ const crearPaciente = async (req, res) => {
                 genero,
                 direccion,
                 ciudad,
-                passwordHash: passwordHash || 'temp_password', // En producción, hashear la contraseña
+                passwordHash: passwordHash || 'temp_password',
                 activo: true
             }).returning();
 
@@ -233,7 +218,7 @@ const crearPaciente = async (req, res) => {
 
     } catch (error) {
         console.error("Error creando paciente:", error);
-        
+
         if (error.code === '23505') { // Violación de unique constraint
             return res.status(409).json({
                 success: false,
@@ -259,7 +244,7 @@ const actualizarPaciente = async (req, res) => {
             direccion,
             ciudad,
             activo,
-            
+
             // Datos específicos del paciente
             tipoSangre,
             alergias,
