@@ -34,7 +34,7 @@ const client = new Client({
     });
 
     // Montar rutas
-    app.use('/api/users', userRoutes(db)); // Pasamos db a las rutas
+    app.use('/api/users', userRoutes(db));
 
     // Manejo de rutas no encontradas
     app.use('*', (req, res) => {
