@@ -6,7 +6,7 @@ import { usuarios } from './auth.js';
 
 export const schema = {
   // auth
-  usuarios
+  usuarios,
   // Medical
   pacientes,
   medicos,

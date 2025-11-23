@@ -1,5 +1,6 @@
 import { obtenerPacientes, obtenerPacientePorId, crearPaciente, actualizarPaciente, eliminarPaciente, buscarPacientes } from '../controllers/pacientesController.js';
 import { obtenerMedicos, obtenerMedicoPorId, crearMedico, actualizarMedico, eliminarMedico, buscarMedico } from '../controllers/medicosController.js';
+import { obtenerLaboratorios, obtenerLaboratoriosPorId, crearLaboratorio, eliminarLaboratorio } from '../controllers/laboratoriosController.js';
 import express from 'express';
 
 
@@ -18,5 +19,10 @@ userRouter.post('/medicos/create', crearMedico);
 userRouter.put('/medicos/update/:id', actualizarMedico);
 userRouter.delete('/medicos/delete/:id', eliminarMedico);
 userRouter.get('/medicos/search', buscarMedico);
+
+userRouter.get('/laboratorios', obtenerLaboratorios);
+userRouter.get('/laboratorios/:id', obtenerLaboratoriosPorId);
+userRouter.post('/laboratorios/create', crearLaboratorio);
+userRouter.delete('laboratorios/delete/:id', eliminarLaboratorio);
 
 export default userRouter;
