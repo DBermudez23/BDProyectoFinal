@@ -25,12 +25,12 @@ export default function FormularioReceta() {
   const [searchDoctor, setSearchDoctor] = useState("");
   const [doctoresEncontrados, setDoctoresEncontrados] = useState([]);
 
-  //  Handler general reutilizable para RHF
+  // 📌 Handler general reutilizable para RHF
   const handleInputChange = (name, value) => {
     setValue(name, value);
   };
 
-  //  Cargar productos (simulado, reemplaza por tu API)
+  // 🔽 Cargar productos (simulado)
   useEffect(() => {
     setProductos([
       { id: 1, nombre: "Ibuprofeno 400mg" },
@@ -38,7 +38,7 @@ export default function FormularioReceta() {
     ]);
   }, []);
 
-  //  Cargar lotes según producto
+  // 🔁 Cargar lotes según producto
   useEffect(() => {
     if (productoSeleccionado == 1) {
       setLotes(["A001", "A002", "A003"]);
@@ -49,7 +49,7 @@ export default function FormularioReceta() {
     }
   }, [productoSeleccionado]);
 
-  //  Buscar paciente (debounce 400ms)
+  // 🔎 Buscar paciente (debounce)
   useEffect(() => {
     const delay = setTimeout(() => {
       if (searchPaciente.trim().length > 2) {
@@ -61,7 +61,7 @@ export default function FormularioReceta() {
     return () => clearTimeout(delay);
   }, [searchPaciente]);
 
-  //  Buscar doctor (debounce 400ms)
+  // 🔎 Buscar doctor (debounce)
   useEffect(() => {
     const delay = setTimeout(() => {
       if (searchDoctor.trim().length > 2) {
@@ -73,7 +73,7 @@ export default function FormularioReceta() {
     return () => clearTimeout(delay);
   }, [searchDoctor]);
 
-  //  Enviar form
+  // 📤 Enviar form
   const onSubmit = (data) => {
     const formData = {
       ...data,
@@ -86,6 +86,11 @@ export default function FormularioReceta() {
       .post("/api/recetas", formData)
       .then(() => alert("Receta generada"))
       .catch(() => alert("Error al enviar"));
+  };
+
+  // 🖨 Función imprimir
+  const imprimirReceta = () => {
+    window.print();
   };
 
   return (
@@ -166,6 +171,7 @@ export default function FormularioReceta() {
                     className="p-2 bg-white rounded cursor-pointer hover:bg-green-100"
                     onClick={() => {
                       handleInputChange("doctor", d.nombre);
+                      handleInputChange("especializacion", d.especializacion);
                       setDoctoresEncontrados([]);
                     }}
                   >
@@ -179,6 +185,13 @@ export default function FormularioReceta() {
               {...register("doctor")}
               className="w-full p-3 border rounded-xl"
               placeholder="Nombre del doctor"
+            />
+
+            {/* NUEVO ➜ Especialización */}
+            <input
+              {...register("especializacion")}
+              className="w-full p-3 border rounded-xl"
+              placeholder="Especialización"
             />
           </div>
 
@@ -254,12 +267,25 @@ export default function FormularioReceta() {
             ></textarea>
           </div>
 
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white p-3 rounded-xl font-semibold hover:bg-blue-700"
-          >
-            Generar Receta
-          </button>
+          {/* BOTONES */}
+          <div className="flex gap-3">
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white p-3 rounded-xl font-semibold hover:bg-blue-700"
+            >
+              Generar Receta
+            </button>
+
+            {/* NUEVO ➜ Botón imprimir */}
+            <button
+              type="button"
+              onClick={imprimirReceta}
+              className="w-full bg-gray-700 text-white p-3 rounded-xl font-semibold hover:bg-gray-800"
+            >
+              Imprimir
+            </button>
+          </div>
+
         </form>
       </div>
     </div>
