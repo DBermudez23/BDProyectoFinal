@@ -105,6 +105,28 @@ export default function FormularioReceta() {
           {/* 🔹 PACIENTE */}
           <div className="space-y-2">
             <h2 className="text-xl font-semibold">Datos del Paciente</h2>
+            {/* NUEVO ➜ Tipo de sangre */}
+<select
+  {...register("tipo_sangre")}
+  className="w-full p-3 border rounded-xl"
+>
+  <option value="">Tipo de sangre</option>
+  <option value="A+">A+</option>
+  <option value="A-">A-</option>
+  <option value="B+">B+</option>
+  <option value="B-">B-</option>
+  <option value="AB+">AB+</option>
+  <option value="AB-">AB-</option>
+  <option value="O+">O+</option>
+  <option value="O-">O-</option>
+</select>
+
+{/* NUEVO ➜ EPS */}
+<input
+  {...register("eps")}
+  className="w-full p-3 border rounded-xl"
+  placeholder="Entidad prestadora de salud (EPS)"
+/>
 
             <input
               type="text"
