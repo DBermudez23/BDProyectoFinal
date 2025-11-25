@@ -2,6 +2,7 @@ import { obtenerPacientes, obtenerPacientePorId, crearPaciente, actualizarPacien
 import { obtenerMedicos, obtenerMedicoPorId, crearMedico, actualizarMedico, eliminarMedico, buscarMedico } from '../controllers/medicosController.js';
 import { obtenerLaboratorios, obtenerLaboratoriosPorId, crearLaboratorio, eliminarLaboratorio } from '../controllers/laboratoriosController.js';
 import express from 'express';
+import { crearUsuario, obtenerUsuarios, obtenerUsuarioPorId, actualizarUsuario, eliminarUsuario } from '../controllers/usuariosController.js';
 
 
 const userRouter = express.Router();
@@ -24,5 +25,10 @@ userRouter.get('/laboratorios', obtenerLaboratorios);
 userRouter.get('/laboratorios/:id', obtenerLaboratoriosPorId);
 userRouter.post('/laboratorios/create', crearLaboratorio);
 userRouter.delete('laboratorios/delete/:id', eliminarLaboratorio);
+
+userRouter.get('/usuarios/', obtenerUsuarios);
+userRouter.get('/usuarios/:id', obtenerUsuarioPorId);
+userRouter.post('/usuerios/create', crearUsuario);
+userRouter.delete('/usuarios/', eliminarUsuario);
 
 export default userRouter;

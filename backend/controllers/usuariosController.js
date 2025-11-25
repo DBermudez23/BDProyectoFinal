@@ -189,7 +189,7 @@ export const crearUsuario = async (req, res, db) => {
   }
 };
 
-// ✅ Actualizar usuario
+// Actualizar usuario
 export const actualizarUsuario = async (req, res, db) => {
   try {
     const { id } = req.params;
@@ -270,7 +270,7 @@ export const actualizarUsuario = async (req, res, db) => {
       .where(eq(usuarios.idUsuario, parseInt(id)))
       .returning();
 
-    // Excluir passwordHash de la respuesta
+    // Excluir passwordHash de la respesta
     const { passwordHash: _, ...usuarioSinPassword } = usuarioActualizado[0];
 
     res.json({
@@ -288,7 +288,6 @@ export const actualizarUsuario = async (req, res, db) => {
   }
 };
 
-// ✅ Eliminar usuario (soft delete)
 export const eliminarUsuario = async (req, res, db) => {
   try {
     const { id } = req.params;
@@ -321,7 +320,6 @@ export const eliminarUsuario = async (req, res, db) => {
   }
 };
 
-// ✅ Login de usuario
 export const loginUsuario = async (req, res, db) => {
   try {
     const { email, password } = req.body;
