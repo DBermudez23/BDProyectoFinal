@@ -1,0 +1,1 @@
+ALTER TABLE "medicos" ALTER COLUMN "id_usuario" DROP NOT NULL;

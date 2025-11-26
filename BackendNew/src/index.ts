@@ -5,11 +5,15 @@ import cors from 'cors';
 import { db } from './db';                    // ← Tu conexión reutilizable
 import { usuarios } from './db/schema';        // ← Tu tabla
 import { eq } from 'drizzle-orm';
+import appRoute from './routes/appRoute.js';
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+//const appRoute = require('./routes/appRoute');
+app.use('/api', appRoute);
 
 // Ruta de bienvenida + prueba de conexión
 app.get('/', async (req: Request, res: Response) => {

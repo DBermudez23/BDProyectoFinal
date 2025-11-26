@@ -13,10 +13,6 @@ import {
 } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
-// ================================================================
-// 1. TABLAS PRINCIPALES
-// ================================================================
-
 // Usuarios y roles (autenticación)
 export const usuarios = pgTable('usuarios', {
   idUsuario: serial('id_usuario').primaryKey(),
@@ -29,7 +25,7 @@ export const usuarios = pgTable('usuarios', {
   segundoApellido: varchar('segundo_apellido', { length: 50 }),
   email: varchar('email', { length: 100 }).unique(),
   telefono: varchar('telefono', { length: 15 }),
-  fechaNacimiento: date('fecha_nacimiento'),
+  fechaNacimiento: varchar('fecha_nacimiento'),
   genero: varchar('genero', { length: 25 }),
   direccion: varchar('direccion', { length: 100 }),
   ciudad: varchar('ciudad', { length: 50 }),
@@ -59,8 +55,7 @@ export const medicos = pgTable('medicos', {
   idMedico: serial('id_medico').primaryKey(),
   idUsuario: integer('id_usuario')
     .references(() => usuarios.idUsuario)
-    .unique()
-    .notNull(),
+    .unique(),
   especialidadPrincipal: varchar('especialidad_principal', { length: 100 }).notNull(),
   registroMedico: varchar('registro_medico', { length: 50 }).notNull().unique(),
   universidad: varchar('universidad', { length: 100 }),
@@ -198,9 +193,7 @@ export const lotes = pgTable('lotes', {
   createdAt: timestamp('created_at').defaultNow(),
 });
 
-// ================================================================
-// 2. RELACIONES (todo en un solo lugar)
-// ================================================================
+// RELACIONES 
 
 export const usuariosRelations = relations(usuarios, ({ one, many }) => ({
   paciente: one(pacientes, {

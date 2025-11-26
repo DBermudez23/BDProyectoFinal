@@ -1,0 +1,1 @@
+ALTER TABLE "usuarios" ALTER COLUMN "fecha_nacimiento" SET DATA TYPE varchar;

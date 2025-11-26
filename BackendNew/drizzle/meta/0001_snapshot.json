@@ -1,0 +1,1095 @@
+{
+  "id": "7d74b7bc-d042-478f-86e7-14f154f7e653",
+  "prevId": "0d1e43e0-4873-43cf-a29d-4c6e225a68cd",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.detalles_receta": {
+      "name": "detalles_receta",
+      "schema": "",
+      "columns": {
+        "id_detalle": {
+          "name": "id_detalle",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_receta": {
+          "name": "id_receta",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_producto": {
+          "name": "id_producto",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dosis": {
+          "name": "dosis",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "frecuencia": {
+          "name": "frecuencia",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "via_administracion": {
+          "name": "via_administracion",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "duracion_tratamiento": {
+          "name": "duracion_tratamiento",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cantidad_prescrita": {
+          "name": "cantidad_prescrita",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "observaciones": {
+          "name": "observaciones",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "posologia": {
+          "name": "posologia",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "detalles_receta_id_receta_recetas_id_receta_fk": {
+          "name": "detalles_receta_id_receta_recetas_id_receta_fk",
+          "tableFrom": "detalles_receta",
+          "tableTo": "recetas",
+          "columnsFrom": [
+            "id_receta"
+          ],
+          "columnsTo": [
+            "id_receta"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "detalles_receta_id_producto_productos_id_producto_fk": {
+          "name": "detalles_receta_id_producto_productos_id_producto_fk",
+          "tableFrom": "detalles_receta",
+          "tableTo": "productos",
+          "columnsFrom": [
+            "id_producto"
+          ],
+          "columnsTo": [
+            "id_producto"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.dispensaciones": {
+      "name": "dispensaciones",
+      "schema": "",
+      "columns": {
+        "id_dispensacion": {
+          "name": "id_dispensacion",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_detalle_receta": {
+          "name": "id_detalle_receta",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_lote": {
+          "name": "id_lote",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cantidad_dispensada": {
+          "name": "cantidad_dispensada",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fecha_dispensacion": {
+          "name": "fecha_dispensacion",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "dispensado_por": {
+          "name": "dispensado_por",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "observaciones": {
+          "name": "observaciones",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "dispensaciones_id_detalle_receta_detalles_receta_id_detalle_fk": {
+          "name": "dispensaciones_id_detalle_receta_detalles_receta_id_detalle_fk",
+          "tableFrom": "dispensaciones",
+          "tableTo": "detalles_receta",
+          "columnsFrom": [
+            "id_detalle_receta"
+          ],
+          "columnsTo": [
+            "id_detalle"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "dispensaciones_id_lote_lotes_id_lote_fk": {
+          "name": "dispensaciones_id_lote_lotes_id_lote_fk",
+          "tableFrom": "dispensaciones",
+          "tableTo": "lotes",
+          "columnsFrom": [
+            "id_lote"
+          ],
+          "columnsTo": [
+            "id_lote"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "dispensaciones_dispensado_por_usuarios_id_usuario_fk": {
+          "name": "dispensaciones_dispensado_por_usuarios_id_usuario_fk",
+          "tableFrom": "dispensaciones",
+          "tableTo": "usuarios",
+          "columnsFrom": [
+            "dispensado_por"
+          ],
+          "columnsTo": [
+            "id_usuario"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.especialidades": {
+      "name": "especialidades",
+      "schema": "",
+      "columns": {
+        "id_especialidad": {
+          "name": "id_especialidad",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nombre_especialidad": {
+          "name": "nombre_especialidad",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "descripcion": {
+          "name": "descripcion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "especialidades_nombre_especialidad_unique": {
+          "name": "especialidades_nombre_especialidad_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "nombre_especialidad"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.laboratorios": {
+      "name": "laboratorios",
+      "schema": "",
+      "columns": {
+        "id_laboratorio": {
+          "name": "id_laboratorio",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nombre_laboratorio": {
+          "name": "nombre_laboratorio",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "direccion": {
+          "name": "direccion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "telefono": {
+          "name": "telefono",
+          "type": "varchar(15)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "activo": {
+          "name": "activo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "laboratorios_nombre_laboratorio_unique": {
+          "name": "laboratorios_nombre_laboratorio_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "nombre_laboratorio"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.lotes": {
+      "name": "lotes",
+      "schema": "",
+      "columns": {
+        "id_lote": {
+          "name": "id_lote",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_producto": {
+          "name": "id_producto",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_proveedor": {
+          "name": "id_proveedor",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "numero_lote": {
+          "name": "numero_lote",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fecha_fabricacion": {
+          "name": "fecha_fabricacion",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fecha_vencimiento": {
+          "name": "fecha_vencimiento",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cantidad_recibida": {
+          "name": "cantidad_recibida",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cantidad_disponible": {
+          "name": "cantidad_disponible",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "precio_compra": {
+          "name": "precio_compra",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "precio_venta": {
+          "name": "precio_venta",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ubicacion": {
+          "name": "ubicacion",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estado": {
+          "name": "estado",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'Activo'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "lotes_id_producto_productos_id_producto_fk": {
+          "name": "lotes_id_producto_productos_id_producto_fk",
+          "tableFrom": "lotes",
+          "tableTo": "productos",
+          "columnsFrom": [
+            "id_producto"
+          ],
+          "columnsTo": [
+            "id_producto"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "lotes_id_proveedor_proveedores_id_proveedor_fk": {
+          "name": "lotes_id_proveedor_proveedores_id_proveedor_fk",
+          "tableFrom": "lotes",
+          "tableTo": "proveedores",
+          "columnsFrom": [
+            "id_proveedor"
+          ],
+          "columnsTo": [
+            "id_proveedor"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.medicos": {
+      "name": "medicos",
+      "schema": "",
+      "columns": {
+        "id_medico": {
+          "name": "id_medico",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_usuario": {
+          "name": "id_usuario",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "especialidad_principal": {
+          "name": "especialidad_principal",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "registro_medico": {
+          "name": "registro_medico",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "universidad": {
+          "name": "universidad",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "anio_graduacion": {
+          "name": "anio_graduacion",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estado_activo": {
+          "name": "estado_activo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "medicos_id_usuario_usuarios_id_usuario_fk": {
+          "name": "medicos_id_usuario_usuarios_id_usuario_fk",
+          "tableFrom": "medicos",
+          "tableTo": "usuarios",
+          "columnsFrom": [
+            "id_usuario"
+          ],
+          "columnsTo": [
+            "id_usuario"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "medicos_id_usuario_unique": {
+          "name": "medicos_id_usuario_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id_usuario"
+          ]
+        },
+        "medicos_registro_medico_unique": {
+          "name": "medicos_registro_medico_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "registro_medico"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.medicos_especialidades": {
+      "name": "medicos_especialidades",
+      "schema": "",
+      "columns": {
+        "id_medico": {
+          "name": "id_medico",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_especialidad": {
+          "name": "id_especialidad",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "medicos_especialidades_id_medico_medicos_id_medico_fk": {
+          "name": "medicos_especialidades_id_medico_medicos_id_medico_fk",
+          "tableFrom": "medicos_especialidades",
+          "tableTo": "medicos",
+          "columnsFrom": [
+            "id_medico"
+          ],
+          "columnsTo": [
+            "id_medico"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "medicos_especialidades_id_especialidad_especialidades_id_especialidad_fk": {
+          "name": "medicos_especialidades_id_especialidad_especialidades_id_especialidad_fk",
+          "tableFrom": "medicos_especialidades",
+          "tableTo": "especialidades",
+          "columnsFrom": [
+            "id_especialidad"
+          ],
+          "columnsTo": [
+            "id_especialidad"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "medicos_especialidades_id_medico_id_especialidad_pk": {
+          "name": "medicos_especialidades_id_medico_id_especialidad_pk",
+          "columns": [
+            "id_medico",
+            "id_especialidad"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.pacientes": {
+      "name": "pacientes",
+      "schema": "",
+      "columns": {
+        "id_paciente": {
+          "name": "id_paciente",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_usuario": {
+          "name": "id_usuario",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tipo_sangre": {
+          "name": "tipo_sangre",
+          "type": "varchar(5)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "alergias": {
+          "name": "alergias",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "condiciones_medicas": {
+          "name": "condiciones_medicas",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contacto_emergencia_nombre": {
+          "name": "contacto_emergencia_nombre",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contacto_emergencia_telefono": {
+          "name": "contacto_emergencia_telefono",
+          "type": "varchar(15)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estado_civil": {
+          "name": "estado_civil",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ocupacion": {
+          "name": "ocupacion",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "pacientes_id_usuario_usuarios_id_usuario_fk": {
+          "name": "pacientes_id_usuario_usuarios_id_usuario_fk",
+          "tableFrom": "pacientes",
+          "tableTo": "usuarios",
+          "columnsFrom": [
+            "id_usuario"
+          ],
+          "columnsTo": [
+            "id_usuario"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "pacientes_id_usuario_unique": {
+          "name": "pacientes_id_usuario_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id_usuario"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.productos": {
+      "name": "productos",
+      "schema": "",
+      "columns": {
+        "id_producto": {
+          "name": "id_producto",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_laboratorio": {
+          "name": "id_laboratorio",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "codigo_producto": {
+          "name": "codigo_producto",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nombre_comercial": {
+          "name": "nombre_comercial",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nombre_generico": {
+          "name": "nombre_generico",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "principio_activo": {
+          "name": "principio_activo",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "concentracion": {
+          "name": "concentracion",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "forma_farmaceutica": {
+          "name": "forma_farmaceutica",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "via_administracion": {
+          "name": "via_administracion",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "presentacion": {
+          "name": "presentacion",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contraindicaciones": {
+          "name": "contraindicaciones",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "efectos_secundarios": {
+          "name": "efectos_secundarios",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "requiere_formula": {
+          "name": "requiere_formula",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "activo": {
+          "name": "activo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "productos_id_laboratorio_laboratorios_id_laboratorio_fk": {
+          "name": "productos_id_laboratorio_laboratorios_id_laboratorio_fk",
+          "tableFrom": "productos",
+          "tableTo": "laboratorios",
+          "columnsFrom": [
+            "id_laboratorio"
+          ],
+          "columnsTo": [
+            "id_laboratorio"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "productos_codigo_producto_unique": {
+          "name": "productos_codigo_producto_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "codigo_producto"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.proveedores": {
+      "name": "proveedores",
+      "schema": "",
+      "columns": {
+        "id_proveedor": {
+          "name": "id_proveedor",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nombre_proveedor": {
+          "name": "nombre_proveedor",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "contacto_nombre": {
+          "name": "contacto_nombre",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "telefono": {
+          "name": "telefono",
+          "type": "varchar(15)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "direccion": {
+          "name": "direccion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "activo": {
+          "name": "activo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "proveedores_nombre_proveedor_unique": {
+          "name": "proveedores_nombre_proveedor_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "nombre_proveedor"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.recetas": {
+      "name": "recetas",
+      "schema": "",
+      "columns": {
+        "id_receta": {
+          "name": "id_receta",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_paciente": {
+          "name": "id_paciente",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_medico": {
+          "name": "id_medico",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "codigo_receta": {
+          "name": "codigo_receta",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fecha_prescripcion": {
+          "name": "fecha_prescripcion",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "diagnostico_principal": {
+          "name": "diagnostico_principal",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "instrucciones_generales": {
+          "name": "instrucciones_generales",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estado": {
+          "name": "estado",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'Activa'"
+        },
+        "validada": {
+          "name": "validada",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "recetas_id_paciente_pacientes_id_paciente_fk": {
+          "name": "recetas_id_paciente_pacientes_id_paciente_fk",
+          "tableFrom": "recetas",
+          "tableTo": "pacientes",
+          "columnsFrom": [
+            "id_paciente"
+          ],
+          "columnsTo": [
+            "id_paciente"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "recetas_id_medico_medicos_id_medico_fk": {
+          "name": "recetas_id_medico_medicos_id_medico_fk",
+          "tableFrom": "recetas",
+          "tableTo": "medicos",
+          "columnsFrom": [
+            "id_medico"
+          ],
+          "columnsTo": [
+            "id_medico"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "recetas_codigo_receta_unique": {
+          "name": "recetas_codigo_receta_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "codigo_receta"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.usuarios": {
+      "name": "usuarios",
+      "schema": "",
+      "columns": {
+        "id_usuario": {
+          "name": "id_usuario",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_rol": {
+          "name": "id_rol",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tipo_documento": {
+          "name": "tipo_documento",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "numero_documento": {
+          "name": "numero_documento",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "primer_nombre": {
+          "name": "primer_nombre",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "segundo_nombre": {
+          "name": "segundo_nombre",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "primer_apellido": {
+          "name": "primer_apellido",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "segundo_apellido": {
+          "name": "segundo_apellido",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "telefono": {
+          "name": "telefono",
+          "type": "varchar(15)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fecha_nacimiento": {
+          "name": "fecha_nacimiento",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "genero": {
+          "name": "genero",
+          "type": "varchar(25)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "direccion": {
+          "name": "direccion",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ciudad": {
+          "name": "ciudad",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "password_hash": {
+          "name": "password_hash",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "activo": {
+          "name": "activo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "usuarios_numero_documento_unique": {
+          "name": "usuarios_numero_documento_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "numero_documento"
+          ]
+        },
+        "usuarios_email_unique": {
+          "name": "usuarios_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
