@@ -1,9 +1,9 @@
 import { pgTable, serial, varchar, text, boolean, timestamp, integer, primaryKey } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
-import { pacientes, medicos } from './medical';
-import { productos } from './products';
-import { lotes } from './products';
-import { usuarios } from './auth';
+import { schema } from './index.js';import { pacientes } from "./medicalShcema.js";
+import { medicos } from "./medicalShcema.js";
+import { productos, lotes } from "./productoSchema.js";
+import { usuarios } from "./auth.js";
 
 // Tabla de Recetas
 export const recetas = pgTable('recetas', {

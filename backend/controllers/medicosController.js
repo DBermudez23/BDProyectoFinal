@@ -1,6 +1,7 @@
-import { db } from "../db/drizzle.js";
-import { medicos, usuarios, medicosEspecialidades, especialidades } from "../db/schema.js";
+import { schema } from "../db/schema/index.js";
 import { eq, desc, like, and, or, inArray } from "drizzle-orm";
+
+const {usuarios, medicosEspecialidades, especialidades} = schema
 
 // API para obtener todos los médicos 
 const obtenerMedicos = async (req, res) => {

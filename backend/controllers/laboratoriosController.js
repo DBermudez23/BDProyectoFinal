@@ -1,6 +1,7 @@
-import { db } from '../db/drizzle.js';
-import { laboratorios } from '../db/schema.js';
+import { schema } from '../db/schema/index.js';
 import { eq, desc, like, and, or } from "drizzle-orm";
+
+const { laboratorios } = schema;
 
 // API para obtener todos los laboratorios
 const obtenerLaboratorios = async (req, res) => {

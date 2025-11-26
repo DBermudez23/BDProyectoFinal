@@ -1,3 +1,5 @@
+import { pgTable, serial, varchar, text, boolean, timestamp, integer, date, primaryKey } from 'drizzle-orm/pg-core';
+
 export const usuarios = pgTable('usuarios', {
   idUsuario: serial('id_usuario').primaryKey(),
   idRol: integer('id_rol').references(() => roles.idRol),

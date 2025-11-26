@@ -1,10 +1,12 @@
-import { productos, laboratorios } from '../db/schema/productos.js';
+import { schema } from '../db/schema/index.js';
 import { eq, and, or, like, desc, sql } from 'drizzle-orm';
 
-// ✅ Obtener todos los productos con información del laboratorio
-export const obtenerProductos = async (req, res, db) => {
+const { productos, laboratorios } = schema;
+
+// Obtener todos los productos con información del laboratorio
+const obtenerProductos = async (req, res, db) => {
   try {
-    const allProductos = await db
+    const obtenerProductos = await db
       .select({
         idProducto: productos.idProducto,
         idLaboratorio: productos.idLaboratorio,
@@ -42,8 +44,8 @@ export const obtenerProductos = async (req, res, db) => {
   }
 };
 
-// ✅ Obtener un producto por ID
-export const obtenerProductoPorId = async (req, res, db) => {
+// Obtener un producto por ID
+const obtenerProductoPorId = async (req, res, db) => {
   try {
     const { id } = req.params;
 
@@ -94,8 +96,8 @@ export const obtenerProductoPorId = async (req, res, db) => {
   }
 };
 
-// ✅ Crear nuevo producto
-export const crearProducto = async (req, res, db) => {
+// Crear nuevo producto
+const crearProducto = async (req, res, db) => {
   try {
     const {
       idLaboratorio,
@@ -167,8 +169,8 @@ export const crearProducto = async (req, res, db) => {
   }
 };
 
-// ✅ Actualizar producto
-export const actualizarProducto = async (req, res, db) => {
+// Actualizar producto
+const actualizarProducto = async (req, res, db) => {
   try {
     const { id } = req.params;
     const {
@@ -258,8 +260,8 @@ export const actualizarProducto = async (req, res, db) => {
   }
 };
 
-// ✅ Eliminar producto (soft delete)
-export const eliminarProducto = async (req, res, db) => {
+// Eliminar producto (soft delete)
+const eliminarProducto = async (req, res, db) => {
   try {
     const { id } = req.params;
 
@@ -291,8 +293,8 @@ export const eliminarProducto = async (req, res, db) => {
   }
 };
 
-// ✅ Buscar productos
-export const buscarProductos = async (req, res, db) => {
+// Buscar productos
+const buscarProductos = async (req, res, db) => {
   try {
     const { query } = req.query;
 
@@ -342,4 +344,11 @@ export const buscarProductos = async (req, res, db) => {
       error: error.message
     });
   }
+};
+
+export {
+  obtenerProductoPorId,
+  obtenerProductos,
+  crearProducto,
+  eliminarProducto
 };

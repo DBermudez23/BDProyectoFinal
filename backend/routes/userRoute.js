@@ -3,6 +3,8 @@ import { obtenerMedicos, obtenerMedicoPorId, crearMedico, actualizarMedico, elim
 import { obtenerLaboratorios, obtenerLaboratoriosPorId, crearLaboratorio, eliminarLaboratorio } from '../controllers/laboratoriosController.js';
 import express from 'express';
 import { crearUsuario, obtenerUsuarios, obtenerUsuarioPorId, actualizarUsuario, eliminarUsuario } from '../controllers/usuariosController.js';
+import { crearLote, obtenerLotes, obtenerLotePorId, eliminarLote } from '../controllers/lotesController.js';
+import { crearProducto, obtenerProductos, obtenerProductoPorId, eliminarProducto } from '../controllers/productosController.js';
 
 
 const userRouter = express.Router();
@@ -26,9 +28,21 @@ userRouter.get('/laboratorios/:id', obtenerLaboratoriosPorId);
 userRouter.post('/laboratorios/create', crearLaboratorio);
 userRouter.delete('laboratorios/delete/:id', eliminarLaboratorio);
 
-userRouter.get('/usuarios/', obtenerUsuarios);
+userRouter.get('/usuarios', obtenerUsuarios);
 userRouter.get('/usuarios/:id', obtenerUsuarioPorId);
 userRouter.post('/usuerios/create', crearUsuario);
 userRouter.delete('/usuarios/', eliminarUsuario);
+
+userRouter.get('/lotes', obtenerLotes);
+userRouter.get('/lotes/:id', obtenerLotePorId);
+userRouter.post('/lotes/create', crearLote);
+userRouter.delete('/lotes/delete/:id', eliminarLote);
+
+userRouter.get('/productos', obtenerProductos);
+userRouter.get('/productos/:id', obtenerProductoPorId);
+userRouter.post('/productos/create', crearProducto);
+userRouter.delete('/productos/delete/:id', eliminarProducto);
+
+
 
 export default userRouter;

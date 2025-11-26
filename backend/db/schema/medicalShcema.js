@@ -1,6 +1,6 @@
 import { pgTable, serial, varchar, text, boolean, timestamp, integer, primaryKey } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
-import { usuarios } from './auth';
+import { usuarios } from './auth.js';
 
 // Tabla de Pacientes
 export const pacientes = pgTable('pacientes', {

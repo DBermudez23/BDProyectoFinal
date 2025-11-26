@@ -1,7 +1,9 @@
-import { lotes, productos, proveedores } from '../db/schema/productos.js';
+import { schema } from '../db/schema/index.js';
 import { eq, and, or, like, desc, gte, lte, sql } from 'drizzle-orm';
 
-// ✅ Obtener todos los lotes con información de producto y proveedor
+const { lotes, productos, proveedores} = schema;
+
+// API para obtener todos los lotes con información de producto y proveedor
 export const obtenerLotes = async (req, res, db) => {
   try {
     const allLotes = await db
@@ -49,7 +51,7 @@ export const obtenerLotes = async (req, res, db) => {
   }
 };
 
-// ✅ Obtener un lote por ID
+//  Obtener un lote por ID
 export const obtenerLotePorId = async (req, res, db) => {
   try {
     const { id } = req.params;
@@ -113,7 +115,7 @@ export const obtenerLotePorId = async (req, res, db) => {
   }
 };
 
-// ✅ Crear nuevo lote
+//  Crear nuevo lote
 export const crearLote = async (req, res, db) => {
   try {
     const {
@@ -195,7 +197,7 @@ export const crearLote = async (req, res, db) => {
   }
 };
 
-// ✅ Actualizar lote
+// Actualizar lote
 export const actualizarLote = async (req, res, db) => {
   try {
     const { id } = req.params;
@@ -280,7 +282,7 @@ export const actualizarLote = async (req, res, db) => {
   }
 };
 
-// ✅ Eliminar lote
+// Eliminar lote
 export const eliminarLote = async (req, res, db) => {
   try {
     const { id } = req.params;
@@ -312,7 +314,7 @@ export const eliminarLote = async (req, res, db) => {
   }
 };
 
-// ✅ Obtener lotes por producto
+// Obtener lotes por producto
 export const obtenerLotesPorProducto = async (req, res, db) => {
   try {
     const { idProducto } = req.params;
@@ -356,7 +358,7 @@ export const obtenerLotesPorProducto = async (req, res, db) => {
   }
 };
 
-// ✅ Obtener lotes próximos a vencer
+// Obtener lotes próximos a vencer
 export const obtenerLotesProximosVencer = async (req, res, db) => {
   try {
     const { dias = 30 } = req.query;
@@ -404,7 +406,7 @@ export const obtenerLotesProximosVencer = async (req, res, db) => {
   }
 };
 
-// ✅ Actualizar stock de lote
+// Actualizar stock de lote
 export const actualizarStockLote = async (req, res, db) => {
   try {
     const { id } = req.params;
@@ -450,7 +452,7 @@ export const actualizarStockLote = async (req, res, db) => {
     // Actualizar stock
     const loteActualizado = await db
       .update(lotes)
-      .set({ 
+      .set({
         cantidadDisponible: nuevaCantidad,
         estado: nuevaCantidad === 0 ? 'Agotado' : 'Activo'
       })

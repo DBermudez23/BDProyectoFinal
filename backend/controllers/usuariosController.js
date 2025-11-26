@@ -1,9 +1,11 @@
-import { usuarios } from '../db/schema/auth.js';
+import { schema } from '../db/schema/index.js';
 import { eq, and, or, like, desc, ne } from 'drizzle-orm';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-// ✅ Obtener todos los usuarios
+const { usuarios } = schema;
+
+// Obtener todos los usuarios
 export const obtenerUsuarios = async (req, res, db) => {
   try {
     const allUsuarios = await db
@@ -42,7 +44,7 @@ export const obtenerUsuarios = async (req, res, db) => {
   }
 };
 
-// ✅ Obtener un usuario por ID
+// Obtener un usuario por ID
 export const obtenerUsuarioPorId = async (req, res, db) => {
   try {
     const { id } = req.params;
@@ -89,7 +91,7 @@ export const obtenerUsuarioPorId = async (req, res, db) => {
   }
 };
 
-// ✅ Crear nuevo usuario
+// Crear nuevo usuario
 export const crearUsuario = async (req, res, db) => {
   try {
     const {
@@ -162,9 +164,9 @@ export const crearUsuario = async (req, res, db) => {
 
     // Generar JWT
     const token = jwt.sign(
-      { 
-        id: nuevoUsuario[0].idUsuario, 
-        rol: nuevoUsuario[0].idRol 
+      {
+        id: nuevoUsuario[0].idUsuario,
+        rol: nuevoUsuario[0].idRol
       },
       process.env.JWT_SECRET,
       { expiresIn: '30d' }
@@ -361,9 +363,9 @@ export const loginUsuario = async (req, res, db) => {
 
     // Generar JWT
     const token = jwt.sign(
-      { 
-        id: usuario[0].idUsuario, 
-        rol: usuario[0].idRol 
+      {
+        id: usuario[0].idUsuario,
+        rol: usuario[0].idRol
       },
       process.env.JWT_SECRET,
       { expiresIn: '30d' }
@@ -388,7 +390,7 @@ export const loginUsuario = async (req, res, db) => {
   }
 };
 
-// ✅ Cambiar contraseña
+// Cambiar contraseña
 export const cambiarPassword = async (req, res, db) => {
   try {
     const { id } = req.params;
@@ -447,7 +449,7 @@ export const cambiarPassword = async (req, res, db) => {
   }
 };
 
-// ✅ Buscar usuarios
+// Buscar usuarios
 export const buscarUsuarios = async (req, res, db) => {
   try {
     const { query } = req.query;
