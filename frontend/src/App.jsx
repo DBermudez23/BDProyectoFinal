@@ -39,6 +39,72 @@ export default function FormularioRecetaMedica() {
     }
   }
 
+  const fetchMedicos = async () => {
+    try {
+
+      const response = await axios.get(`${URL}/medicos`);
+
+      // response.data contiene el cuerpo de la respuesta del servidor
+      const pacientes = response.data;
+
+      setPacientes(medicos)
+
+      console.log('Medicos obtenidos:', medicos);
+
+      // Si necesitas guardar los pacientes en un estado de React:
+      // setPacientes(pacientes);   // <-- descomenta si usas useState
+
+      return medicos;
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+    const fetchLaboratorios = async () => {
+    try {
+
+      const response = await axios.get(`${URL}/laboratorios`);
+
+      // response.data contiene el cuerpo de la respuesta del servidor
+      const pacientes = response.data;
+
+      setPacientes(medicos)
+
+      console.log('Laboratorios obtenidos:', laboratorios);
+
+      // Si necesitas guardar los pacientes en un estado de React:
+      // setPacientes(pacientes);   // <-- descomenta si usas useState
+
+      return laboratorios;
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+    const fetchusuarios = async () => {
+    try {
+
+      const response = await axios.get(`${URL}/usuarios`);
+
+      // response.data contiene el cuerpo de la respuesta del servidor
+      const pacientes = response.data;
+
+      setPacientes(usuarios)
+
+      console.log('Usuarios obtenidos:', usuarios);
+
+      // Si necesitas guardar los pacientes en un estado de React:
+      // setPacientes(pacientes);   // <-- descomenta si usas useState
+
+      return usuarios;
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
   const [form, setForm] = useState({
     pacienteId: "",
     medicoId: "",
