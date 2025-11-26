@@ -1,14 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import axios from 'axios';
 
-// Versión completamente en JavaScript puro (React JS)
-// Sin TypeScript, sin componentes shadcn, solo HTML + Tailwind
+// Este formulario usa un hook personalizado llamado useInfo
+// que debe exponer: getPacientes(), getMedicos()
+// No implementamos el hook, solo lo usamos.
 
 export default function FormularioRecetaMedica() {
-  //const { getPacientes, getMedicos } = useInfo();
 
   const [pacientes, setPacientes] = useState([]);
   const [medicos, setMedicos] = useState([]);
+
+  const URL = 'http://localhost:3000';
+
+  const fetchPacientes = async () => {
+    try {
+
+      const response = await axios.get(`${URL}/pacientes`);
+
+      // response.data contiene el cuerpo de la respuesta del servidor
+      const pacientes = response.data;
+
+      setPacientes(pacientes)
+
+      console.log('Pacientes obtenidos:', pacientes);
+
+      // Si necesitas guardar los pacientes en un estado de React:
+      // setPacientes(pacientes);   // <-- descomenta si usas useState
+
+      return pacientes;
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const [form, setForm] = useState({
     pacienteId: "",
@@ -35,93 +64,47 @@ export default function FormularioRecetaMedica() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Datos enviados:", form);
-    // Aquí harías el POST al backend
+    // Aquí haces el POST hacia tu endpoint para crear receta
   };
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl mx-auto mt-10">
-      <div className="shadow-xl rounded-2xl p-6 bg-white">
-        <h1 className="text-3xl font-bold mb-6 text-center">Formulación de Recetas Médicas</h1>
+      <Card className="shadow-xl rounded-2xl p-4">
+        <CardContent>
+          <h1 className="text-3xl font-bold mb-6 text-center">Formulación de Recetas Médicas</h1>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
 
-          {/* Paciente */}
-          <div>
-            <label className="font-semibold">Paciente</label>
-            <select
-              name="pacienteId"
-              value={form.pacienteId}
-              onChange={handleChange}
-              className="w-full border rounded-lg p-2 mt-1"
-              required
-            >
-              <option value="">Seleccione un paciente</option>
-              {pacientes.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.nombre} {p.apellido}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Médico */}
-          <div>
-            <label className="font-semibold">Médico</label>
-            <select
-              name="medicoId"
-              value={form.medicoId}
-              onChange={handleChange}
-              className="w-full border rounded-lg p-2 mt-1"
-              required
-            >
-              <option value="">Seleccione un médico</option>
-              {medicos.map((m) => (
-                <option key={m.id} value={m.id}>
-                  Dr. {m.nombre} {m.apellido} — {m.especialidad}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Diagnóstico */}
-          <div>
-            <label className="font-semibold">Diagnóstico</label>
-            <textarea
-              name="diagnostico"
-              value={form.diagnostico}
-              onChange={handleChange}
-              className="w-full border rounded-lg p-2 mt-1"
-              placeholder="Ingrese el diagnóstico..."
-              required
-            />
-          </div>
-
-          {/* Tratamiento */}
-          <div>
-            <label className="font-semibold">Tratamiento</label>
-            <textarea
-              name="tratamiento"
-              value={form.tratamiento}
-              onChange={handleChange}
-              className="w-full border rounded-lg p-2 mt-1"
-              placeholder="Indique el tratamiento o medicamentos..."
-              required
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-
-            {/* Producto */}
+            {/* Seleccionar Paciente */}
             <div>
-              <label className="font-semibold">Producto</label>
+              <label className="font-semibold">Paciente</label>
               <select
-                name="productoId"
-                value={form.productoId}
+                name="pacienteId"
+                value={form.pacienteId}
                 onChange={handleChange}
                 className="w-full border rounded-lg p-2 mt-1"
                 required
               >
-                <option value="">Seleccione un producto</option>
+                <option value="">Seleccione un paciente</option>
+                {pacientes.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.nombre} {p.apellido}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Seleccionar Médico */}
+            <div>
+              <label className="font-semibold">Médico</label>
+              <select
+                name="medicoId"
+                value={form.medicoId}
+                onChange={handleChange}
+                className="w-full border rounded-lg p-2 mt-1"
+                required
+              >
+                <option value="">Seleccione un médico</option>
                 {medicos.map((m) => (
                   <option key={m.id} value={m.id}>
                     Dr. {m.nombre} {m.apellido} — {m.especialidad}
@@ -130,51 +113,53 @@ export default function FormularioRecetaMedica() {
               </select>
             </div>
 
-            {/* Lote */}
+            {/* Diagnóstico */}
             <div>
-              <label className="font-semibold">Lote</label>
-              <select
-                name="loteId"
-                value={form.loteId}
+              <label className="font-semibold">Diagnóstico</label>
+              <Textarea
+                name="diagnostico"
+                value={form.diagnostico}
                 onChange={handleChange}
-                className="w-full border rounded-lg p-2 mt-1"
+                className="mt-1"
+                placeholder="Ingrese el diagnóstico..."
                 required
-              >
-                <option value="">Seleccione un lote</option>
-                {medicos.map((m) => (
-                  <option key={m.id} value={m.id}>
-                    Dr. {m.nombre} {m.apellido} — {m.especialidad}
-                  </option>
-                ))}
-              </select>
+              />
             </div>
 
-          </div>
+            {/* Tratamiento */}
+            <div>
+              <label className="font-semibold">Tratamiento</label>
+              <Textarea
+                name="tratamiento"
+                value={form.tratamiento}
+                onChange={handleChange}
+                className="mt-1"
+                placeholder="Indique el tratamiento o medicamentos..."
+                required
+              />
+            </div>
 
-          {/* Observaciones */}
-          <div>
-            <label className="font-semibold">Observaciones</label>
-            <textarea
-              name="observaciones"
-              value={form.observaciones}
-              onChange={handleChange}
-              className="w-full border rounded-lg p-2 mt-1"
-              placeholder="Notas adicionales..."
-            />
-          </div>
+            {/* Observaciones */}
+            <div>
+              <label className="font-semibold">Observaciones</label>
+              <Textarea
+                name="observaciones"
+                value={form.observaciones}
+                onChange={handleChange}
+                className="mt-1"
+                placeholder="Notas adicionales..."
+              />
+            </div>
 
-          <button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl text-lg mt-4"
-          >
-            Guardar Receta
-          </button>
-          {/* Producto y Lote en grid de dos columnas */}
-
-        </form>
-      </div>
+            <Button type="submit" className="w-full py-3 text-lg rounded-xl">
+              Guardar Receta
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
     </motion.div>
   );
 }
 
-// Recuerda: el hook useInfo debe existir y exponer getPacientes() y getMedicos()
+// Recuerda: este archivo depende de un hook personalizado llamado useInfo
+// El cual debe proveer getPacientes() y getMedicos()
