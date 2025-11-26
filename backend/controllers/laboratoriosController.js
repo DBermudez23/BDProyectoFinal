@@ -1,5 +1,8 @@
 import { schema } from '../db/schema/index.js';
 import { eq, desc, like, and, or } from "drizzle-orm";
+import { getDB } from "../db/connection.js"; 
+
+const db = getDB();
 
 const { laboratorios } = schema;
 

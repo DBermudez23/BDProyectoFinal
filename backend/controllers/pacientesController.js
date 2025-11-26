@@ -1,7 +1,10 @@
 import { schema } from "../db/schema/index.js";
 import { eq, desc, like, and, or } from "drizzle-orm";
+import { getDB } from "../db/connection.js"; 
 
 const { pacientes, usuarios } = schema;
+
+const db = getDB();
 
 // API para obtener todos los pacientes con información de usuario
 const obtenerPacientes = async (req, res) => {

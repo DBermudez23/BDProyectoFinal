@@ -1,5 +1,8 @@
 import { schema } from '../db/schema/index.js';
 import { eq, and, or, like, desc, gte, lte, sql } from 'drizzle-orm';
+import { getDB } from "../db/connection.js"; 
+
+const db = getDB();
 
 const { lotes, productos, proveedores} = schema;
 

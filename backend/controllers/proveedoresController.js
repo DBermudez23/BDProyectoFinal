@@ -1,7 +1,10 @@
 import { proveedores } from '../db/schema/products.js';
 import { eq, and, or, like, desc } from 'drizzle-orm';
+import { getDB } from "../db/connection.js"; 
 
-// ✅ Obtener todos los proveedores
+const db = getDB();
+
+// Obtener todos los proveedores
 export const obtenerProveedores = async (req, res, db) => {
 try {
     const allProveedores = await db
@@ -31,7 +34,7 @@ try {
 }
 };
 
-// ✅ Obtener un proveedor por ID
+// Obtener un proveedor por ID
 export const obtenerProveedorPorId = async (req, res, db) => {
 try {
     const { id } = req.params;
@@ -69,7 +72,7 @@ try {
 }
 };
 
-// ✅ Crear nuevo proveedor
+// Crear nuevo proveedor
 export const crearProveedor = async (req, res, db) => {
 try {
     const {
@@ -129,7 +132,7 @@ try {
 }
 };
 
-// ✅ Actualizar proveedor
+// Actualizar proveedor
 export const actualizarProveedor = async (req, res, db) => {
 try {
     const { id } = req.params;
@@ -206,7 +209,7 @@ try {
 }
 };
 
-// ✅ Eliminar proveedor (soft delete)
+// Eliminar proveedor (soft delete)
 export const eliminarProveedor = async (req, res, db) => {
 try {
     const { id } = req.params;
@@ -239,7 +242,7 @@ try {
 }
 };
 
-// ✅ Buscar proveedores
+// Buscar proveedores
 export const buscarProveedores = async (req, res, db) => {
 try {
     const { query } = req.query;
@@ -288,7 +291,7 @@ try {
 }
 };
 
-// ✅ Obtener proveedores activos
+// Obtener proveedores activos
 export const obtenerProveedoresActivos = async (req, res, db) => {
 try {
     const proveedoresActivos = await db
@@ -318,7 +321,7 @@ try {
 }
 };
 
-// ✅ Obtener estadísticas de proveedores
+// Obtener estadísticas de proveedores
 export const obtenerEstadisticasProveedores = async (req, res, db) => {
 try {
     const estadisticas = await db
