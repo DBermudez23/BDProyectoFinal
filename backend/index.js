@@ -4,7 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Client } from 'pg';
-import userRouter from './routes/userRoute.js';
+import userRoutes from './routes/userRoute.js';
 
 // Inicializar cliente de PostgreSQL
 const client = new Client({
@@ -97,7 +97,7 @@ const client = new Client({
       });
     });
 
-    app.use('/api/users', userRouter);
+    app.use('/api/users', userRoutes);
 
     // Iniciar servidor
     const PORT = process.env.PORT || 3000;
