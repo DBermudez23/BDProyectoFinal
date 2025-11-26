@@ -1,8 +1,12 @@
+// index.js
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Client } from 'pg';
+
+// Importar rutas
+import userRoutes from './src/routes/users.js';
 
 // Inicializar cliente de PostgreSQL
 const client = new Client({

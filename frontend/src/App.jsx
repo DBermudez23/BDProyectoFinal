@@ -1,43 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import axios from 'axios';
 
-// Este formulario usa un hook personalizado llamado useInfo
-// que debe exponer: getPacientes(), getMedicos()
-// No implementamos el hook, solo lo usamos.
+// Versión completamente en JavaScript puro (React JS)
+// Sin TypeScript, sin componentes shadcn, solo HTML + Tailwind
 
 export default function FormularioRecetaMedica() {
 
   const [pacientes, setPacientes] = useState([]);
   const [medicos, setMedicos] = useState([]);
-
-  const URL = 'http://localhost:3000';
-
-  const fetchPacientes = async () => {
-    try {
-
-      const response = await axios.get(`${URL}/pacientes`);
-
-      // response.data contiene el cuerpo de la respuesta del servidor
-      const pacientes = response.data;
-
-      setPacientes(pacientes)
-
-      console.log('Pacientes obtenidos:', pacientes);
-
-      // Si necesitas guardar los pacientes en un estado de React:
-      // setPacientes(pacientes);   // <-- descomenta si usas useState
-
-      return pacientes;
-
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   const [form, setForm] = useState({
     pacienteId: "",
