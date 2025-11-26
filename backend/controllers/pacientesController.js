@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { schema } from "../db/schema/index.js";
 import { eq, desc, like, and, or } from "drizzle-orm";
 
@@ -429,5 +428,3 @@ export {
     eliminarPaciente,
     buscarPacientes
 };
-=======
->>>>>>> e9ef20d220e0b657973b1fe39cee2bd783d8bc2f
