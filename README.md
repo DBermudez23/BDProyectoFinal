@@ -1,4 +1,4 @@
-```
+
 # PROYECTO FINAL ACADÉMICO - CURSO BASES DE DATOS UTP
 
 ## 📋 Descripción
