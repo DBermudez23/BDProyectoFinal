@@ -14,11 +14,10 @@ Proyecto en el cual se realiza un modulo para un sistema para mejorar la gestió
 ### Esquema Principal
 ```mermaid
 erDiagram
-    roles ||--o{ usuarios : ""
     usuarios ||--o| pacientes : ""
     usuarios ||--o| medicos : ""
-    roles ||--o{ roles_permisos : ""
-    permisos ||--o{ roles_permisos : ""
+    medicos ||--o{ medicos_especialidades : ""
+    especialidades ||--o{ medicos_especialidades : ""
     laboratorios ||--o{ productos : ""
     productos ||--o{ lotes : ""
     proveedores ||--o{ lotes : ""
@@ -29,7 +28,7 @@ erDiagram
     detalles_receta ||--o{ dispensaciones : ""
     lotes ||--o{ dispensaciones : ""
     usuarios ||--o{ dispensaciones : ""
-```
+  ```
 
 ### Tablas Implementadas (13)
 | Tabla | Descripción |
